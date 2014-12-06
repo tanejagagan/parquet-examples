@@ -1,8 +1,5 @@
 package com.cloudera.parquet.hadoop;
 
-import static java.lang.Thread.sleep;
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -19,26 +16,16 @@ import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import org.apache.hadoop.mapreduce.Mapper.Context;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-import parquet.Log;
 import parquet.example.data.Group;
 import parquet.hadoop.ParquetInputSplit;
 import parquet.hadoop.example.ExampleInputFormat;
-import parquet.schema.MessageTypeParser;
-import parquet.schema.Type;
-import parquet.schema.GroupType;
 
 public class TestReadParquet  extends Configured implements Tool {
-  private static final Log LOG = Log.getLog(TestReadParquet.class);
-
-    private static class FieldDescription {
-	public String constraint;
-	public String type;
+  private static class FieldDescription {
 	public String name;
     }
 
@@ -53,8 +40,6 @@ public class TestReadParquet  extends Configured implements Tool {
 		if(line.startsWith("optional") || line.startsWith("required")) {
 		    String[] parts = line.split(" ");
 		    FieldDescription field = new FieldDescription();
-		    field.constraint = parts[0];
-		    field.type = parts[1];
 		    field.name = parts[2];
 		    fields.add(field);
 		}
